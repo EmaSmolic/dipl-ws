@@ -15,7 +15,7 @@ app.listen(3000, () => {
 	const wss = new WebSocket.Server({ port: 4000 })
 wss.on('connection', ws => {
   ws.on('message', message => {
-  console.log(message)
+
     ws.send(message)
   })
 
