@@ -16,7 +16,7 @@ app.listen(3000, () => {
 wss.on('connection', ws => {
   ws.on('message', message => {
 
-    ws.send(JSON.stringify(message))
+    ws.send(message)
   })
 
 })
