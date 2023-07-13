@@ -8,7 +8,7 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
-app.listen(300+, () => {
+app.listen(3000, () => {
 	console.log(`Example app listening on port 3000`)
 })
 	const WebSocket = require('ws');
