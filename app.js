@@ -14,6 +14,7 @@ app.listen(3000, () => {
 const WebSocket = require('ws')
 const wss = new WebSocket.Server({ port: 4000, 'Access-Control-Allow-Origin': "*" })
 wss.on('connection', ws => {
+	ws.on('error', console.log);
 	ws.on('message', message => {
 		ws.send(message)
 	})
