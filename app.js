@@ -9,7 +9,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
 app.route("/")
-.get((res,req) => res.send('ok'))
+.get((res,req) => res.send('ok')).catch(err => res.send(err))
 
 app.listen(3000, () => {
 	console.log(`Example app listening on port 3000`)
