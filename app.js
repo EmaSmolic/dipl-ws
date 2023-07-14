@@ -1,25 +1,23 @@
 const express = require('express')
-var cors = require('cors')
-const app = express()
-
-const bodyParser = require('body-parser')
-
-app.use(cors())
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: false }))
-
-app.route("/")
-.get((res,req) => res.send('ok')).catch(err => res.send(err))
-
-app.listen(3000, () => {
-	console.log(`Example app listening on port 3000`)
-})
-const WebSocket = require('ws')
-const wss = new WebSocket.Server({ port: 4000 })
-wss.on('connection', ws => {
-	ws.on('message', message => {
-		ws.send(message)
-	})
-
-	ws.send('HEY')
+const webserver = express()
+ .use((req, res) =>
+   res.send('hey')
+ )
+ .listen(3000, () => console.log(`Listening on ${3000}`))
+ 
+const { WebSocketServer } = require('ws')
+const sockserver = new WebSocketServer({ port: 443 })
+sockserver.on('connection', ws => {
+ console.log('New client connected!')
+ ws.send('connection established')
+ ws.on('close', () => console.log('Client has disconnected!'))
+ ws.on('message', data => {
+   sockserver.clients.forEach(client => {
+     console.log(`distributing message: ${data}`)
+     client.send(`${data}`)
+   })
+ })
+ ws.onerror = function () {
+   console.log('websocket error')
+ }
 })
