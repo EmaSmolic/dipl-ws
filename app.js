@@ -8,6 +8,9 @@ app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
+app.route("/")
+.get((res,req) => res.status(200).end())
+
 app.listen(3000, () => {
 	console.log(`Example app listening on port 3000`)
 })
