@@ -1,13 +1,22 @@
-const WebSocketServer = require('ws');
+const express = require('express')
+var cors = require('cors')
+const app = express()
 
-const wss = new WebSocketServer({ port: 8080 });
+const bodyParser = require('body-parser')
 
-wss.on('connection', function connection(ws) {
-  ws.on('error', console.error);
+app.use(cors())
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
 
-  ws.on('message', function message(data) {
-    console.log('received: %s', data);
-  });
+app.listen(3000, () => {
+	console.log(`Example app listening on port 3000`)
+})
+const WebSocket = require('ws')
+const wss = new WebSocket.Server({ port: 4000 })
+wss.on('connection', ws => {
+	ws.on('message', message => {
+		ws.send(message)
+	})
 
-  ws.send('something');
-});
+	ws.send('HEY')
+})
