@@ -1,3 +1,5 @@
+//following the tutorial on https://www.pubnub.com/blog/nodejs-websocket-programming-examples/
+
 const express = require('express')
 const webserver = express()
  .use((req, res) =>
@@ -13,10 +15,9 @@ wss.on('connection', ws => {
  ws.on('close', () => console.log('Client has disconnected!'))
 
  ws.on('message', data => {
-   sockserver.clients.forEach(client => {
-     console.log(`distributing message: ${data}`)
-     client.send(`${data}`)
-   })
+  
+     ws.send(`${data}`)
+   
  })
  
  ws.onerror = function () {
